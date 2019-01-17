@@ -1,65 +1,67 @@
 <template>
-    <my-page title="语言" :page="page">
-        <app-list :data="groups" />
-    </my-page>
+    <div class="container">
+        <div v-for="group in data">
+            <h2 class="section-title">{{ group.name }}</h2>
+            <div class="tool-list">
+                <div class="mu-paper list-item mu-paper-round mu-paper-1" 
+                    v-for="app in group.apps">
+                    <router-link class="link" :to="app.to" :href="app.href" :target="app.target">
+                        <img :src="app.icon" class="img">
+                        <div class="info">
+                            <h3 class="text">{{ app.name }}</h3>
+                            <div class="desc">{{ app.desc }}</div>
+                        </div>
+                        <i class="icon icon-heart"></i>
+                    </router-link>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                groups: [
-                    {
-                        // name: '文档编辑',
-                        apps: [
-                            {
-                                name: '希腊字母表',
-                                desc: '',
-                                icon: '/static/img/lang.svg',
-                                to: '/greek_alphabet'
-                            },
-                            {
-                                name: '五十音图',
-                                desc: '',
-                                icon: '/static/img/japanese.svg',
-                                to: 'xxx',
-                                href: 'https://japanese.yunser.com/',
-                                target: '_blank'
-                            }
-                        ]
-                    }
-                ],
-                page: {
-                    menu: [
-                        {
-                            type: 'icon',
-                            icon: 'apps',
-                            href: 'https://app.yunser.com/',
-                            target: '_blank',
-                            title: '应用'
-                        }
-                    ]
+            }
+        },
+        props: {
+            data: {
+                type: Array,
+                default() {
+                    return []
                 }
             }
         },
-        computed: {
-        },
         mounted() {
         },
+        destroyed() {
+        },
         methods: {
-            init() {
-            },
-            fileChange(e) {
-            },
-            sizeStr: function (size) {
-            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/var';
+@mixin clearfix {
+    &:after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+    }
+}
 
+.container {
+    max-width: 840px;
+    margin: 0 auto;
+}
+.section-title {
+    font-size: 24px;
+    margin: 16px 0;
+}
 .tool-list {
     max-width: 840px;
     margin: 0 auto;
@@ -72,6 +74,7 @@
         padding: 8px;
         margin: 2px 16px 16px 2px;
         background-color: #fff;
+        cursor: pointer;
         //border: 1px solid #ccc;
         &:hover {
             background-color: #f9f9f9;
