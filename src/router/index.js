@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 const Home = resolve => require(['@/views/Home'], resolve)
 const GreekAlphabet = resolve => require(['@/views/GreekAlphabet'], resolve)
-const About = resolve => require(['@/views/About'], resolve)
 const Error404 = resolve => require(['@/views/error/Error404'], resolve)
 
 Vue.use(Router)
@@ -16,10 +15,6 @@ let routes = [
     {
         path: '/greek_alphabet',
         component: GreekAlphabet
-    },
-    {
-        path: '/about',
-        component: About
     },
     {
         path: '*',
